@@ -1,38 +1,254 @@
-.App {
+/* General weather app styling */
+.weather-app {
+  font-family: 'Lato', sans-serif;
   text-align: center;
+  padding: 20px;
+  width: 375px;  /* iPhone screen width */
+  height: 800px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Enables vertical scrolling if content overflows */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for touch devices */
 }
 
-.App-logo {
-  height: 40vmin;
+.background-image {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Location and Search */
+.location-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  color: white;
+  position: relative;
+}
+
+.location-header h1 {
+  font-size: 1.5rem;
+  margin: 20px 0 0 0;
+}
+
+.search-icon {
+  width: 25px;
+  height: 25px;
+  margin-top: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Search form styling */
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  padding: 5px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+}
+
+.search-form button {
+  padding: 5px 10px;
+  font-size: 1rem;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #0056b3;
+}
+
+.weather-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.temperature-info {
+  display: flex;
+  flex-direction: column;  /* Stack current temp and feels like temp vertically */
+  align-items: flex-start;  /* Align the text to the left */
+  justify-content: flex-start;
+}
+
+.temperature-info h2 {
+  margin: 0;
+  font-size: 4rem;
+  color: white;
+  font-weight: 900;
+  text-align: left;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.temperature-info p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: white;
+  margin-top: 4px;
+  font-weight: 700;
+  text-align: left;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Hourly Forecast styling */
+.hourly-forecast {
+  background-color: rgba(20, 76, 129, 0.5);  /* Dark blue with 50% opacity */
+  color: white;  /* White text */
+  padding: 12px;  /* Reduced padding */
+  border-radius: 10px;
+  margin-top: 10px;  /* Reduced margin */
+}
+
+.hourly-forecast h2 {
+  margin-top: 0.1px;
+  margin-bottom: 0px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: left;
+}
+
+.hourly-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  height: 35px;
+}
+
+.time {
+  flex: 0 0 80px; /* Fixed space for time */
+  text-align: left;
+  color: white;
+  font-size: 1rem;
+}
+
+.temp {
+  color: white;
+  font-weight: bold;
+}
+
+.hourly-weather-icon {
+  position: absolute;
+  right: 0; /* Align icon to the right */
+  width: 35px;
+  height: 35px;
+}
+
+.line {
+  background-color: white;
+  opacity: 0.5;
+  height: 0.5px;
+}
+
+
+/* Flexbox layout for two panels */
+.info-panels {
+  display: flex;
+  justify-content: space-between;  /* Space between the two panels */
+  align-items: flex-start;
+  margin-top: 10px;
+  gap: 20px;
+}
+
+.precipitation-panel, .sunrise-sunset-panel {
+  background-color: rgba(20, 76, 129, 0.5);  /* Dark blue with 50% opacity */
+  color: white;  /* White text */
+  padding: 12px;  /* Reduced padding */
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 48%;  /* Each panel takes about half the width */
+  height: auto;
+}
+
+.precipitation-panel h2, .sunrise-sunset-panel h2 {
+  margin-top: 0.1px;
+  margin-bottom: 0px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: left;
+}
+
+.map-panel img {
+  width: 100%;  /* Make the image fit within the panel */
+  border-radius: 10px;  /* Rounded corners for consistency */
+}
+
+.city-label {
+  font-size: 10px;
+  color: black;
+  font-weight: bold;
+  background-color: transparent;
+  padding: 3px 8px;
+  border-radius: 5px;
+  transform: translate(-100%, -120%); /* Position the label above the marker */
+  white-space: nowrap;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sun-times {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  /* Stack the items vertically */
+  justify-content: flex-start;
+}
+
+.sunrise-time, .sunset-time {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.sunrise-time p, .sunset-time p {
+  margin-left: 17px; /* Add spacing between the icon and the text */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bold-time {
+  font-weight: bold;  /* Make the time bold */
+  font-size: 1.2rem;
+}
+
+.sun-icon {
+  width: 45px;
+  height: 45px;
+}
+
+/* Optional: make "Sunrise:" and "Sunset:" non-bold */
+.sunrise-time span:first-child, .sunset-time span:first-child {
+  font-size: 0.9rem;
+  font-weight: normal; /* Make the text non-bold */
 }
